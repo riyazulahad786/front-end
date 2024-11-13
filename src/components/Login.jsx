@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {useAuth } from '../context/AuthContext';
 import '../index.css'
-// import { GoogleOAuthProvider,GoogleLogin  } from '@react-oauth/google';
+import { GoogleOAuthProvider,GoogleLogin  } from '@react-oauth/google';
 
 const api = axios.create({
   baseURL:"https://backend-manager.onrender.com"
@@ -47,12 +47,12 @@ function Login() {
       console.error("Login error", error);
     }
   };
-// const handleSuccess = (credentialResponse ) => {
-//   console.log(credentialResponse);
-// }
-// const handleError = () => {
-//   console.log('Login Failed');
-// }
+const handleSuccess = (credentialResponse ) => {
+  console.log(credentialResponse);
+}
+const handleError = () => {
+  console.log('Login Failed');
+}
   return (
     <div className="container wrapper d-flex align-items-center justify-content-center">
       <form className="form_wrapper shadow px-3 py-3" onSubmit={handleLogin}>
@@ -88,12 +88,12 @@ function Login() {
           <button className="btn btn-primary">Login with Google</button>
         </div> */}
         <div className="d-flex justify-content-center align-items-center mt-2">
-        {/* <GoogleOAuthProvider clientId="211384663061-5u5bh0egtl72kc1p18avnaakb0j78fa7.apps.googleusercontent.com">
+        <GoogleOAuthProvider clientId="211384663061-5u5bh0egtl72kc1p18avnaakb0j78fa7.apps.googleusercontent.com">
           <GoogleLogin
             onSuccess={handleSuccess}
             onError = {handleError}
           />
-        </GoogleOAuthProvider> */}
+        </GoogleOAuthProvider>
         </div>
       </form>
     </div>
