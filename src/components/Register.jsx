@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 // Create an axios instance with the base URL
 const api = axios.create({
@@ -43,7 +44,9 @@ function Register() {
       });
       console.log("Registration successful", response.data);
       navigate('/login');
+      toast.success("Registration was successfully");
     } catch (error) {
+      toast.error("Ops something went wrong")
       console.error("Registration error", error);
       alert("Registration failed. Please try again.");
     }

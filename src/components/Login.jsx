@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 // Create an axios instance with the base URL
 const api = axios.create({
@@ -31,9 +32,11 @@ function Login() {
       });
       console.log("Login successful", response.data);
       navigate('/'); 
+      toast.success("Login success");
     } catch (error) {
+      toast.error("Invalid credentials");
       console.error("Login error", error);
-      alert("Invalid login credentials"); 
+      // alert("Invalid login credentials"); 
     }
   };
 
