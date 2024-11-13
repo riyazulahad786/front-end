@@ -1,6 +1,15 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext"; // Import useAuth
 
 function Navbar() {
+  const navigate = useNavigate();
+  const { isLoggedIn, logout } = useAuth(); // Get state and logout function from context
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg px-4 bg-primary">
@@ -21,20 +30,30 @@ function Navbar() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0 gap-3">
-              <li className="nav-item">
-                <NavLink to="/login" className="nav-link">
-                  <button type="button" className="btn btn-danger">
-                    Login
+              {isLoggedIn ? (
+                <li className="nav-item">
+                  <button onClick={handleLogout} className="btn btn-danger">
+                    Logout
                   </button>
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink to="/register" className="nav-link">
-                  <button type="button" className="btn btn-danger">
-                    Register
-                  </button>
-                </NavLink>
-              </li>
+                </li>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <NavLink to="/login" className="nav-link">
+                      <button type="button" className="btn btn-danger">
+                        Login
+                      </button>
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink to="/register" className="nav-link">
+                      <button type="button" className="btn btn-danger">
+                        Register
+                      </button>
+                    </NavLink>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

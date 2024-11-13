@@ -1,18 +1,19 @@
-import { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-
-// Create an axios instance with the base URL
+import { useState } from "react";
+import axios from "axios";
+import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import {useAuth } from '../context/AuthContext';
+import '../index.css'
 const api = axios.create({
-  baseURL: 'https://backendapi-9196.onrender.com'
+  baseURL: "https://backendapi-9196.onrender.com"
 });
 
 function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth(); // Get login function from context
   const [loginInfo, setLoginInfo] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: ""
   });
 
   const handleChange = (e) => {
@@ -26,50 +27,55 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post('/auth/login', {
+      const response = await api.post("/auth/login", {
         email: loginInfo.email,
         password: loginInfo.password
       });
-      console.log("Login successful", response.data);
-      navigate('/'); 
-      toast.success("Login success");
+      const { jwtToken } = response.data;
+
+      if (jwtToken) {
+        login(jwtToken); // Update login state in context
+        toast.success("Login success");
+        navigate("/");
+      } else {
+        toast.error("Login failed, please try again");
+      }
     } catch (error) {
       toast.error("Invalid credentials");
       console.error("Login error", error);
-      // alert("Invalid login credentials"); 
     }
   };
 
   return (
-    <div className='container wrapper d-flex align-items-center justify-content-center'>
-      <form className='form_wrapper shadow px-3 py-3' onSubmit={handleLogin}>
-        <div className='py-1'>
-          <label className='form-label'>Email</label>
+    <div className="container wrapper d-flex align-items-center justify-content-center">
+      <form className="form_wrapper shadow px-3 py-3" onSubmit={handleLogin}>
+        <div className="py-1">
+          <label className="form-label">Email</label>
           <input
-            type='email'
-            placeholder='Email'
-            className='form-control'
-            name='email'
+            type="email"
+            placeholder="Email"
+            className="form-control"
+            name="email"
             value={loginInfo.email}
             onChange={handleChange}
           />
         </div>
-        <div className='py-1'>
-          <label className='form-label'>Password</label>
+        <div className="py-1">
+          <label className="form-label">Password</label>
           <input
-            type='password'
-            placeholder='Password'
-            className='form-control'
-            name='password'
+            type="password"
+            placeholder="Password"
+            className="form-control"
+            name="password"
             value={loginInfo.password}
             onChange={handleChange}
           />
         </div>
-        <div className='d-grid mt-3'>
-          <button className='btn btn-primary' type='submit'>Login</button>
+        <div className="d-grid mt-3">
+          <button className="btn btn-primary" type="submit">Login</button>
         </div>
-        <div className='mt-2 d-flex justify-content-center align-items-center'>
-          <p>New user? <a href='/register'>Register Here</a></p>
+        <div className="mt-2 d-flex justify-content-center align-items-center">
+          <p>New user? <NavLink to="/register">Register Here</NavLink></p>
         </div>
       </form>
     </div>
