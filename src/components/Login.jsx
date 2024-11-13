@@ -4,13 +4,15 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {useAuth } from '../context/AuthContext';
 import '../index.css'
+// import { GoogleOAuthProvider,GoogleLogin  } from '@react-oauth/google';
+
 const api = axios.create({
-  baseURL: "https://backendapi-9196.onrender.com"
+  baseURL:"https://backend-manager.onrender.com"
 });
 
 function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth(); // Get login function from context
+  const { login } = useAuth(); 
   const [loginInfo, setLoginInfo] = useState({
     email: "",
     password: ""
@@ -34,7 +36,7 @@ function Login() {
       const { jwtToken } = response.data;
 
       if (jwtToken) {
-        login(jwtToken); // Update login state in context
+        login(jwtToken);
         toast.success("Login success");
         navigate("/");
       } else {
@@ -80,6 +82,9 @@ function Login() {
         <div className="d-flex justify-content-center align-items-center mt-2">
           <button className="btn btn-primary">Login with Google</button>
         </div>
+        {/* <GoogleOAuthProvider>
+          <GoogleLogin/>
+        </GoogleOAuthProvider> */}
       </form>
     </div>
   );
