@@ -47,7 +47,12 @@ function Login() {
       console.error("Login error", error);
     }
   };
-
+// const handleSuccess = (credentialResponse ) => {
+//   console.log(credentialResponse);
+// }
+// const handleError = () => {
+//   console.log('Login Failed');
+// }
   return (
     <div className="container wrapper d-flex align-items-center justify-content-center">
       <form className="form_wrapper shadow px-3 py-3" onSubmit={handleLogin}>
@@ -79,12 +84,17 @@ function Login() {
         <div className="mt-2 d-flex justify-content-center align-items-center">
           <p>New user? <NavLink to="/register">Register Here</NavLink></p>
         </div>
-        <div className="d-flex justify-content-center align-items-center mt-2">
+        {/* <div className="d-flex justify-content-center align-items-center mt-2">
           <button className="btn btn-primary">Login with Google</button>
-        </div>
-        {/* <GoogleOAuthProvider>
-          <GoogleLogin/>
+        </div> */}
+        <div className="d-flex justify-content-center align-items-center mt-2">
+        {/* <GoogleOAuthProvider clientId="211384663061-5u5bh0egtl72kc1p18avnaakb0j78fa7.apps.googleusercontent.com">
+          <GoogleLogin
+            onSuccess={handleSuccess}
+            onError = {handleError}
+          />
         </GoogleOAuthProvider> */}
+        </div>
       </form>
     </div>
   );

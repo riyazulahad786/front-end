@@ -17,6 +17,7 @@ function Register() {
     password: "",
     confirmPassword: ""
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,6 +36,8 @@ function Register() {
       return;
     }
 
+    setLoading(true); 
+
     try {
       const response = await api.post("/auth/signup", {
         firstName: signUpinfo.firstName,
@@ -43,12 +46,15 @@ function Register() {
         password: signUpinfo.password
       });
       console.log("Registration successful", response.data);
-      navigate('/login');
       toast.success("Registration was successfully");
+      navigate('/login');
+    
     } catch (error) {
-      toast.error("Ops something went wrong")
+      toast.error("Ops something went wrong");
       console.error("Registration error", error);
       alert("Registration failed. Please try again.");
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -111,7 +117,9 @@ function Register() {
           />
         </div>
         <div className="d-grid mt-3">
-          <button className="btn btn-primary" type="submit">Signup</button>
+          <button className="btn btn-primary" type="submit" disabled={loading}>
+            {loading ? "Signing Up..." : "Signup"}
+          </button>
         </div>
         <div className="mt-2 d-flex justify-content-center align-items-center">
           <p>
@@ -119,7 +127,7 @@ function Register() {
           </p>
         </div>
         <div className="d-flex justify-content-center align-items-center mt-2">
-          <button className="btn btn-primary">Signup with Google</button>
+          <button className="btn btn-primary" disabled={loading}>Signup with Google</button>
         </div>
       </form>
     </div>
