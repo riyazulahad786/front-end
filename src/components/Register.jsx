@@ -111,7 +111,7 @@ function Register() {
           />
         </div>
         <div className="d-grid mt-3">
-          <button className="btn btn-primary" type="submit">Register</button>
+          <button className="btn btn-primary" type="submit">Signup</button>
         </div>
         <div className="mt-2 d-flex justify-content-center align-items-center">
           <p>
@@ -119,7 +119,7 @@ function Register() {
           </p>
         </div>
         <div className="d-flex justify-content-center align-items-center mt-2">
-          <button className="btn btn-primary">Login with Google</button>
+          <button className="btn btn-primary">Signup with Google</button>
         </div>
       </form>
     </div>

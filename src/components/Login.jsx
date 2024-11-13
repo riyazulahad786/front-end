@@ -77,6 +77,9 @@ function Login() {
         <div className="mt-2 d-flex justify-content-center align-items-center">
           <p>New user? <NavLink to="/register">Register Here</NavLink></p>
         </div>
+        <div className="d-flex justify-content-center align-items-center mt-2">
+          <button className="btn btn-primary">Login with Google</button>
+        </div>
       </form>
     </div>
   );
