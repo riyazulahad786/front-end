@@ -7,7 +7,7 @@ import '../index.css'
 import { GoogleOAuthProvider,GoogleLogin  } from '@react-oauth/google';
 
 const api = axios.create({
-  baseURL:"https://backend-manager.onrender.com"
+  baseURL:"http://localhost:8080"
 });
 
 function Login() {
@@ -38,7 +38,7 @@ function Login() {
       if (jwtToken) {
         login(jwtToken);
         toast.success("Login success");
-        navigate("/");
+        navigate("/home");
       } else {
         toast.error("Login failed, please try again");
       }

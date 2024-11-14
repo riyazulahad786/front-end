@@ -22,7 +22,7 @@ function Home() {
   const [readMode, setReadMode] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState('recent');
-  const apiBaseUrl = `https://backend-manager.onrender.com/api/tasks`; 
+  const apiBaseUrl = `http://localhost:8080/api/tasks`; 
 
   useEffect(() => {
     fetchTasks();
