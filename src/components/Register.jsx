@@ -2,7 +2,8 @@ import { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // Create an axios instance with the base URL
 const api = axios.create({
   baseURL: 'https://backend-manager.onrender.com'
@@ -59,6 +60,7 @@ function Register() {
   };
 
   return (
+    <><ToastContainer/>
     <div className="container wrapper d-flex align-items-center justify-content-center mt-2">
       <form className="form_wrapper shadow px-3 py-3" onSubmit={handleRegister}>
         <div className="py-0">
@@ -131,6 +133,7 @@ function Register() {
         </div>
       </form>
     </div>
+    </>
   );
 }
 

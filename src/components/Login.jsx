@@ -5,7 +5,8 @@ import { toast } from "react-toastify";
 import {useAuth } from '../context/AuthContext';
 import '../index.css'
 import { GoogleOAuthProvider,GoogleLogin  } from '@react-oauth/google';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const api = axios.create({
   baseURL:"https://backend-manager.onrender.com"
 });
@@ -54,6 +55,7 @@ const handleError = () => {
   console.log('Login Failed');
 }
   return (
+    <><ToastContainer />
     <div className="container wrapper d-flex align-items-center justify-content-center">
       <form className="form_wrapper shadow px-3 py-3" onSubmit={handleLogin}>
         <div className="py-1">
@@ -97,6 +99,7 @@ const handleError = () => {
         </div>
       </form>
     </div>
+    </>
   );
 }
 
