@@ -7,7 +7,7 @@ import '../index.css'
 import { GoogleOAuthProvider,GoogleLogin  } from '@react-oauth/google';
 
 const api = axios.create({
-  baseURL:"http://localhost:8080"
+  baseURL:"https://backend-manager.onrender.com"
 });
 
 function Login() {

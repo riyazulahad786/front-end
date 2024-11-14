@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 // Create an axios instance with the base URL
 const api = axios.create({
-  baseURL: 'http://localhost:8080'
+  baseURL: 'https://backend-manager.onrender.com'
 });
 
 function Register() {
